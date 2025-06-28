@@ -1,0 +1,74 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>InvoiceFlow</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9fafb;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .upload-box {
+      border: 2px dashed #d1d5db;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      background-color: white;
+    }
+    .upload-box:hover {
+      border-color: #4f46e5;
+    }
+    .upload-box input[type=file] {
+      display: none;
+    }
+    .upload-label {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container text-center">
+    <h1 class="mb-2">InvoiceFlow</h1>
+    <p class="text-muted mb-4">Smart invoice processing made simple</p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <div class="upload-box mb-4">
+        <label for="invoice" class="upload-label">
+          <img src="https://cdn-icons-png.flaticon.com/512/109/109612.png" alt="Upload" width="64" class="mb-3">
+          <p><strong>Drop your invoice here</strong> or click to browse your files</p>
+          <p class="text-muted">PNG, JPG, PDF &bull; Max 10MB</p>
+        </label>
+        <input type="file" id="invoice" name="invoice" required>
+      </div>
+      <button class="btn btn-primary">Analyze Invoice</button>
+    </form>
+
+    <hr class="my-5">
+
+    <div class="row text-center">
+      <div class="col-md-4">
+        <h5>📤 Upload</h5>
+        <p>Drop your invoice file or click to browse</p>
+      </div>
+      <div class="col-md-4">
+        <h5>🧠 Process</h5>
+        <p>AI extracts key information automatically</p>
+      </div>
+      <div class="col-md-4">
+        <h5>✅ Results</h5>
+        <p>Get structured data ready to use</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
